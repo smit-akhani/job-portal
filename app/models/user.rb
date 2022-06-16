@@ -8,6 +8,13 @@ class User < ApplicationRecord
   has_many :user_cvs,foreign_key: "users_id",dependent: :destroy
   after_create_commit :create_user_detail
 
+  
+  has_many :skill_matches, as: :matchable, dependent: :destroy
+
+  has_many :skill ,through: "skill_matches", dependent: :destroy
+  
+
+
   private
   def create_user_detail
     curent_user=User.find_by(email: self.email)
