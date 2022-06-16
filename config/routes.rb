@@ -13,8 +13,10 @@ Rails.application.routes.draw do
   get '/member-data', to: 'members#show'
   get '/company-data', to: 'companies#show'
 
-    resources :user_details do 
-      
+    resources :user_details 
+    resources :skills 
+    
+    resources :user_cvs do
     end
     resources :user_cv do 
       collection do 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_15_154316) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_16_065343) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -62,6 +62,35 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_15_154316) do
     t.index ["jti"], name: "index_jwt_denylist_on_jti"
   end
 
+  create_table "roles", force: :cascade do |t|
+    t.string "name"
+    t.string "resource_type"
+    t.bigint "resource_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
+    t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
+  end
+
+  create_table "skill_matches", force: :cascade do |t|
+    t.integer "skill_level"
+    t.bigint "skill_id"
+    t.string "matchable_type"
+    t.bigint "matchable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["matchable_type", "matchable_id"], name: "index_skill_matches_on_matchable"
+    t.index ["skill_id"], name: "index_skill_matches_on_skill_id"
+  end
+
+  create_table "skills", force: :cascade do |t|
+    t.string "skill_name"
+    t.text "skill_description"
+    t.string "skill_color"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "user_cvs", force: :cascade do |t|
     t.string "title"
     t.boolean "is_default"
@@ -93,6 +122,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_15_154316) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "users_roles", id: false, force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "role_id"
+    t.index ["role_id"], name: "index_users_roles_on_role_id"
+    t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
+    t.index ["user_id"], name: "index_users_roles_on_user_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "skill_matches", "skills"
 end
