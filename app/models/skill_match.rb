@@ -1,0 +1,2 @@
+class SkillMatch < ApplicationRecord
+end
