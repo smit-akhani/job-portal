@@ -24,7 +24,14 @@ Rails.application.routes.draw do
         get "show_all_cv"
       end
     end
-    
+   
+  scope :company do
+    resources :company_details
+  end
+
+  scope :company do
+    resources :company_details
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
