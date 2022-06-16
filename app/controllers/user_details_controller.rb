@@ -13,7 +13,7 @@ class UserDetailsController < ApplicationController
 
         render json: user_detail , status: 200
     end
-
+    
     private
     def set_user_detail
         @curent_user=Token.new.get_user_from_token(request)
@@ -21,4 +21,5 @@ class UserDetailsController < ApplicationController
     def user_detail_params
         params.require(:user_detail).permit(:name,:contact_number,:gender,:avatar)  
     end
+   
 end
