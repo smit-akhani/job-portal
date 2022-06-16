@@ -6,6 +6,7 @@ class UserCvController < ApplicationController
     # get user_cv/show_all_cv
     def show_all_cv
         @user_cv_list=UserCv.where(users_id: @curent_user.id)
+        p @curent_user
         render json: {
             message: "User Cv List Successfully",
             # Serialzer is servise which is used to serialize the data
@@ -37,7 +38,7 @@ class UserCvController < ApplicationController
     # Update exising   cv of curent user 
     # patch /user_cv/:id
     def update
-        usercv_obj=UserCv.find_by(id: params[:id])
+        usercv_obj=UserCv.where(id: params[:id] , users_id: @curent_user.id).first
         if(usercv_obj==nil)
             render :json =>{message:"Id is invlid"} , status: 400
             return
@@ -53,7 +54,7 @@ class UserCvController < ApplicationController
     # Delete cv of curent user
     # Delete /user_cv/:id
     def destroy
-        x=UserCv.find_by(id: params[:id])
+        x=UserCv.where(id: params[:id] , users_id: @curent_user.id).last
         if(usercv_obj==nil)
             render :json =>{message:"Id is invlid"} , status: 400
             return
