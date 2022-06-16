@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :jwt_authenticatable, jwt_revocation_strategy: JwtDenylist
   has_one :user_detail,foreign_key: "users_id", dependent: :destroy
+  has_many :user_cvs,foreign_key: "users_id",dependent: :destroy
   after_create_commit :create_user_detail
 
   private

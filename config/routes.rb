@@ -13,7 +13,16 @@ Rails.application.routes.draw do
   get '/member-data', to: 'members#show'
   get '/company-data', to: 'companies#show'
 
-    resources :user_details
+    resources :user_details do 
+      
+    end
+    resources :user_cv do 
+      collection do 
+        patch "add_cv"
+        get "show_all_cv"
+      end
+    end
+    
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
