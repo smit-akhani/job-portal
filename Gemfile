@@ -54,5 +54,5 @@ gem "rack-cors", "~> 1.1"
 gem "active_model_serializers"
 gem "rails_refactor"
 gem "rolify"
-
+gem 'dotenv-rails'
 
