@@ -7,7 +7,7 @@ class UserDetailsController < ApplicationController
         if temp.avatar.present?
             user_image_url= Rails.application.routes.url_helpers.rails_blob_path(temp.avatar, only_path: true)
         end
-        
+        UserMailer.with(temp:temp).demo.deliver_later
         render json: {
             message: "User List with skill",
             # Serialzer is servise which is used to serialize the data
