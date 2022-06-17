@@ -18,7 +18,7 @@ class UserCvController < ApplicationController
     # this method get all cv of curent user and return it to frontend
     # get /user_cv/show
     def show
-        @user_cv=UserCv.find_by(id: params[:id])
+        @user_cv=UserCv.where(id: params[:id],users_id: @curent_user.id)
         render json: {
             message: "User Cv List Successfully",
             data: Serializer.new.serializer(@user_cv,UserCvSerializer)

@@ -1,7 +1,7 @@
 class UserMailer < ApplicationMailer
     def demo
-        mail(to: "yashgarala29@gmail.com", subject: "You got a new order!")
-
-
+        attachments['demo.pdf'] = File.read('app/assets/mailer_data/demo.pdf')
+        mail(to: "yash.garala@bacancy.com",
+             subject: "You got a new order!")
     end
 end

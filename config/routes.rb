@@ -14,8 +14,15 @@ Rails.application.routes.draw do
   get '/company-data', to: 'companies#show'
 
     resources :user_details 
-    resources :skills 
-    
+    resources :skills
+   
+    resources :educations do 
+      collection do 
+        get "/get_user_education/:id" => "educations#get_user_education"
+      end
+       
+    end
+             
     resources :user_cvs do
     end
     resources :user_cv do 

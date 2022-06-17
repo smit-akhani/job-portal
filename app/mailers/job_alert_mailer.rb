@@ -1,0 +1,2 @@
+class JobAlertMailer < ApplicationMailer
+end
