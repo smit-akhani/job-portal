@@ -9,7 +9,7 @@ class User < ApplicationRecord
   after_create_commit :create_user_detail
   
   has_many :educations,foreign_key: "user_id",dependent: :destroy
-  
+  has_many :experiences,foreign_key: "user_id",dependent: :destroy
   
   has_many :skill_matches, as: :matchable, dependent: :destroy
 

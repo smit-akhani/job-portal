@@ -20,9 +20,12 @@ Rails.application.routes.draw do
       collection do 
         get "/get_user_education/:id" => "educations#get_user_education"
       end
-       
     end
-             
+    resources :experiences do 
+      collection do 
+        get "/get_user_experience/:id" => "experiences#get_user_experience"
+      end
+    end
     resources :user_cvs do
     end
     resources :user_cv do 
