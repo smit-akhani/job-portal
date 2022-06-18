@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_18_074225) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_18_120532) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -151,6 +151,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_18_074225) do
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
   end
 
+  create_table "save_jobs", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "job_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["job_id"], name: "index_save_jobs_on_job_id"
+    t.index ["user_id"], name: "index_save_jobs_on_user_id"
+  end
+
   create_table "skill_matches", force: :cascade do |t|
     t.integer "skill_level"
     t.bigint "skill_id"
@@ -218,5 +227,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_18_074225) do
   add_foreign_key "job_managers", "users"
   add_foreign_key "jobs", "companies"
   add_foreign_key "jobs", "users"
+  add_foreign_key "save_jobs", "jobs"
+  add_foreign_key "save_jobs", "users"
   add_foreign_key "skill_matches", "skills"
 end

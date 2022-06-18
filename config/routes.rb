@@ -16,6 +16,11 @@ Rails.application.routes.draw do
     resources :user_details 
     resources :skills
     resources :jobs
+    resources :save_jobs do 
+      collection do 
+        post :add_or_remove_save_job
+      end
+    end
    resources :job_manager
     resources :educations do 
       collection do 
