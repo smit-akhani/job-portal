@@ -12,11 +12,13 @@ class User < ApplicationRecord
   has_many :experiences,foreign_key: "user_id",dependent: :destroy
   
   has_many :skill_matches, as: :matchable, dependent: :destroy
-
+  
   has_many :skill ,through: "skill_matches", dependent: :destroy
   after_save :update_default_cv
 
-
+  has_one :job,dependent: :destroy
+  has_many :job_managers
+  has_many :companys, through: :job_managers
   private
   def create_user_detail
     curent_user=User.find_by(email: self.email)
