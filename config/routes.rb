@@ -15,7 +15,8 @@ Rails.application.routes.draw do
 
     resources :user_details 
     resources :skills
-   
+    resources :jobs
+   resources :job_manager
     resources :educations do 
       collection do 
         get "/get_user_education/:id" => "educations#get_user_education"
@@ -42,8 +43,4 @@ Rails.application.routes.draw do
   scope :company do
     resources :company_details
   end
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
 end

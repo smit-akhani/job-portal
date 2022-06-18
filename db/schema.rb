@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_17_083353) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_18_074225) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -107,6 +107,32 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_17_083353) do
     t.index ["user_id"], name: "index_experiences_on_user_id"
   end
 
+  create_table "job_managers", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "company_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_job_managers_on_company_id"
+    t.index ["user_id", "company_id"], name: "index_job_managers_on_user_id_and_company_id", unique: true
+    t.index ["user_id"], name: "index_job_managers_on_user_id"
+  end
+
+  create_table "jobs", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "company_id"
+    t.text "job_description"
+    t.string "job_title"
+    t.integer "year_of_exp"
+    t.string "location"
+    t.date "last_date_to_apply"
+    t.boolean "easy_apply"
+    t.string "job_application_link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_jobs_on_company_id"
+    t.index ["user_id"], name: "index_jobs_on_user_id"
+  end
+
   create_table "jwt_denylist", force: :cascade do |t|
     t.string "jti"
     t.datetime "exp"
@@ -188,5 +214,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_17_083353) do
   add_foreign_key "company_details", "companies"
   add_foreign_key "educations", "users"
   add_foreign_key "experiences", "users"
+  add_foreign_key "job_managers", "companies"
+  add_foreign_key "job_managers", "users"
+  add_foreign_key "jobs", "companies"
+  add_foreign_key "jobs", "users"
   add_foreign_key "skill_matches", "skills"
 end
