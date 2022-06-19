@@ -16,7 +16,6 @@ class UserDetailsController < ApplicationController
     
     private
     def set_user_detail
-        
         @curent_user=Token.new.get_user_from_token(request)
         p @curent_user
     end

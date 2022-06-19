@@ -211,7 +211,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  active_model_serializers
+  active_model_serializers (~> 0.10.2)
   bootsnap
   debug
   devise (~> 4.8)
