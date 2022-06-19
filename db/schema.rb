@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_16_065343) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_18_120532) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -78,6 +78,61 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_16_065343) do
     t.index ["company_id"], name: "index_company_details_on_company_id"
   end
 
+  create_table "educations", force: :cascade do |t|
+    t.string "school_name"
+    t.string "degree"
+    t.string "field_of_study"
+    t.string "start_date"
+    t.string "end_date"
+    t.boolean "current"
+    t.bigint "user_id"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_educations_on_user_id"
+  end
+
+  create_table "experiences", force: :cascade do |t|
+    t.string "title"
+    t.string "employment_type"
+    t.string "company_name"
+    t.string "location"
+    t.string "start_date"
+    t.string "end_date"
+    t.boolean "current"
+    t.text "description"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_experiences_on_user_id"
+  end
+
+  create_table "job_managers", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "company_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_job_managers_on_company_id"
+    t.index ["user_id", "company_id"], name: "index_job_managers_on_user_id_and_company_id", unique: true
+    t.index ["user_id"], name: "index_job_managers_on_user_id"
+  end
+
+  create_table "jobs", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "company_id"
+    t.text "job_description"
+    t.string "job_title"
+    t.integer "year_of_exp"
+    t.string "location"
+    t.date "last_date_to_apply"
+    t.boolean "easy_apply"
+    t.string "job_application_link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_jobs_on_company_id"
+    t.index ["user_id"], name: "index_jobs_on_user_id"
+  end
+
   create_table "jwt_denylist", force: :cascade do |t|
     t.string "jti"
     t.datetime "exp"
@@ -94,6 +149,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_16_065343) do
     t.datetime "updated_at", null: false
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
+  end
+
+  create_table "save_jobs", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "job_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["job_id"], name: "index_save_jobs_on_job_id"
+    t.index ["user_id"], name: "index_save_jobs_on_user_id"
   end
 
   create_table "skill_matches", force: :cascade do |t|
@@ -157,5 +221,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_16_065343) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "company_details", "companies"
+  add_foreign_key "educations", "users"
+  add_foreign_key "experiences", "users"
+  add_foreign_key "job_managers", "companies"
+  add_foreign_key "job_managers", "users"
+  add_foreign_key "jobs", "companies"
+  add_foreign_key "jobs", "users"
+  add_foreign_key "save_jobs", "jobs"
+  add_foreign_key "save_jobs", "users"
   add_foreign_key "skill_matches", "skills"
 end

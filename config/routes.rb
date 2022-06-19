@@ -14,8 +14,24 @@ Rails.application.routes.draw do
   get '/company-data', to: 'companies#show'
 
     resources :user_details 
-    resources :skills 
-    
+    resources :skills
+    resources :jobs
+    resources :save_jobs do 
+      collection do 
+        post :add_or_remove_save_job
+      end
+    end
+   resources :job_manager
+    resources :educations do 
+      collection do 
+        get "/get_user_education/:id" => "educations#get_user_education"
+      end
+    end
+    resources :experiences do 
+      collection do 
+        get "/get_user_experience/:id" => "experiences#get_user_experience"
+      end
+    end
     resources :user_cvs do
     end
     resources :user_cv do 
@@ -28,8 +44,4 @@ Rails.application.routes.draw do
   scope :company do
     resource :company_details
   end
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
 end
