@@ -21,6 +21,8 @@ class User < ApplicationRecord
   has_many :companys, through: :job_managers
   has_many :save_jobs, dependent: :destroy
   has_many :jobs, through: :save_jobs ,dependent: :destroy
+  has_many :applications
+
   private
   def create_user_detail
     curent_user=User.find_by(email: self.email)
