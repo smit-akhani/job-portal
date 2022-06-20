@@ -42,10 +42,6 @@ Rails.application.routes.draw do
     end
    
   scope :company do
-    resources :company_details
-  end
-
-  scope :company do
-    resources :company_details
+    resource :company_details
   end
 end

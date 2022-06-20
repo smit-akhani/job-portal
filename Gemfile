@@ -51,7 +51,7 @@ gem "image_processing", ">= 1.2"
 gem "devise", "~> 4.8"
 gem "devise-jwt", "~> 0.9.0"
 gem "rack-cors", "~> 1.1"
-gem "active_model_serializers"
+gem 'active_model_serializers', '~> 0.10.2'
 gem "rails_refactor"
 gem "rolify"
 gem 'dotenv-rails'
