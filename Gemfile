@@ -55,4 +55,6 @@ gem 'active_model_serializers', '~> 0.10.2'
 gem "rails_refactor"
 gem "rolify"
 gem 'dotenv-rails'
+gem 'pg_search'
+gem 'whenever', require: false
 
