@@ -1,5 +1,4 @@
 task :job_alert  => :environment do
-#    p "-------------------"
     job_alerts =JobAlert.all
     job_alerts.each do |job_alert|
         concat_location_title=job_alert.job_title
