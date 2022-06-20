@@ -8,4 +8,6 @@ class Company < ApplicationRecord
   has_many :jobs, dependent: :destroy
   has_many :job_managers, dependent: :destroy
   has_many :user ,through: :job_managers
+
+  validates :email, presence: true
 end

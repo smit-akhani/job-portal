@@ -29,8 +29,10 @@ class User < ApplicationRecord
     p x.save(:validate => false)
   end
   def update_default_cv
+=begin
     if(self.is_default==true)
       UserCv.where(users_id: self.id).update_all(is_default: false)
     end
+=end
   end
 end
