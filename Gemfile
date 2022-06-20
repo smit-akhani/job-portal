@@ -56,3 +56,5 @@ gem "rails_refactor"
 gem "rolify"
 gem 'dotenv-rails'
 gem 'pg_search'
+gem 'whenever', require: false
+
