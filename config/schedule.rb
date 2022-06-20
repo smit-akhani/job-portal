@@ -5,10 +5,10 @@
 
 # Example:
 #
+set :chronic_options, hours24: true
 set :output, "log/cron.log"
 set :environment, :development
-every 1.minute do
-    p "0000000"
+every 1.day , at: '12:00' do
     rake "job_alert"
 
 end
