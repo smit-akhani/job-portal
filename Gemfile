@@ -58,3 +58,5 @@ gem 'dotenv-rails'
 gem 'pg_search'
 gem 'whenever', require: false
 
+gem 'rails_admin', '~> 3.0'
+gem "sassc-rails"
