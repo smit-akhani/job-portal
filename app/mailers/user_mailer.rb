@@ -4,4 +4,10 @@ class UserMailer < ApplicationMailer
         mail(to: "yash.garala@bacancy.com",
              subject: "You got a new order!")
     end
+    def send_alert
+        @jobs =params[:jobs]
+    
+        mail(to: "yash.garala@bacancy.com",
+             subject: "Job Alert!")
+    end
 end
