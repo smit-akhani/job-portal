@@ -43,7 +43,6 @@ class UserDetailsController < ApplicationController
         
         # skil_arr=JSON.parse skil_arr
         @curent_user.skill.clear
-        p skil_arr
         skil_arr.each do |x|
              x=x.to_i
              p x

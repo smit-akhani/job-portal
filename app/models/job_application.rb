@@ -24,6 +24,6 @@ end
 
   def set_resume
     self.update_attribute(:resume, UserCv.find(self.user_cv_id).cv_blob)
-    p "-----------",self.user_cv_id
+   
   end
 end

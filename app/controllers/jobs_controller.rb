@@ -21,6 +21,7 @@ class JobsController < ApplicationController
         @job=Job.new(job_params)
         @job.user=current_user
         if(@job.save)
+            add_skill(@job)
             render :json =>{status:"success",data: @job} , status: 200
         else 
               render :json =>{status:@job.save!} , status: 400
@@ -29,7 +30,10 @@ class JobsController < ApplicationController
     def update
         
         update_status=@job.update(job_params)
+        p update_status
         if(update_status)
+            add_skill(@job)
+            
             render :json =>{message:"success",data: @job} , status: 200
         else 
               render :json =>{message:update_status} , status: 400
@@ -45,6 +49,12 @@ class JobsController < ApplicationController
 
     end
     private
+    def add_skill(job)
+        skill_arr=params[:skill]
+        job.skill.clear
+        job.skill<<(Skill.where(id:skill_arr))
+        job.save
+    end
     def check_accessability
         @ability=JobManager.where(user:current_user,company_id:params[:job][:company_id]).first
     
