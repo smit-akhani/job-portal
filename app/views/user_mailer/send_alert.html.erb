@@ -1,3 +1,33 @@
+<style>
+.card-img{
+  width: 100%;
+ 
+  height: auto;
+}
+</style>
+<%host="https://f8d9-103-240-35-190.in.ngrok.io"%>
 <%@jobs.each do |x|%>
-    <%=x.job_title%><br>
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+    <% p=x.company.company_detail&.logo
+      if(p==nil)
+        # x=url_for('ino_logo.png')
+      else
+        p= Rails.application.routes.url_helpers.rails_blob_path(x.company.company_detail&.logo, only_path: true)
+        p =host+p
+      end
+
+    %>
+    <img  src="<%=p%>" class="card-img" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title"><%=x.job_title%></h5>
+        <p class="card-text"><small class="text-muted">Last Date To apply <%=x.last_date_to_apply%></small></p>
+         <a href="#" class="btn btn-primary">Show</a>
+      </div>
+    </div>
+  </div>
+</div>
 <%end%>

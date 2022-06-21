@@ -10,7 +10,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   
     def register_success
-      @user = User.find(curent_user.id)
+      @user = User.find(current_user.id)
       render json: {
         message: 'Signed up sucessfully.',
         user: @user
