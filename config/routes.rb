@@ -48,7 +48,13 @@ Rails.application.routes.draw do
   end
 
   scope :user do
-    resources :job_applications
+    resources :job_applications do 
+      collection do 
+        get "/my_job_application" => "job_applications#my_job_application"
+        delete "/delete_job_application/:id" => "job_applications#delete_job_application"
+        get "/my_created_job_application"=>"job_applications#my_created_job_application"
+      end
+    end
   end
 
   resources :companies

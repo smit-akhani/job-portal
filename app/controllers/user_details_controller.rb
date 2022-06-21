@@ -38,13 +38,17 @@ class UserDetailsController < ApplicationController
     def user_detail_params
         params.require(:user_detail).permit(:name,:contact_number,:gender,:avatar)  
     end
-   def add_skill()
-        skil_arr=params[:user_detail][:skill]
-        skil_arr=JSON.parse skil_arr
+   def add_skill
+        skil_arr=params[:skill]
+        
+        # skil_arr=JSON.parse skil_arr
         @curent_user.skill.clear
+        p skil_arr
         skil_arr.each do |x|
-            @curent_user.skill<<Skill.find_by(id:x)
+             x=x.to_i
+             p x
+             @curent_user.skill<<Skill.find_by(id:x)
         end
-        # @curent_user.save
+        @curent_user.save
     end
 end

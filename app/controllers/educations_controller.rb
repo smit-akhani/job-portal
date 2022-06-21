@@ -57,7 +57,7 @@ class EducationsController < ApplicationController
         end
     end
     def education_params
-        params.require(:education).permit(:school_name,:degree,:field_of_study,:start_date,:end_date,:current,:description)
+        params.require(:education).permit(:school_name,:degree,:field_of_study,:start_date,:end_date,:current,:description,:grade)
     end
     def set_education
         if(!@curent_user.has_role?"admin")

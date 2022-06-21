@@ -1,5 +1,6 @@
 class JobApplication < ApplicationRecord
   belongs_to :job
+  attr_accessor :user_resume_url
   belongs_to :user
   has_one_attached :resume
   has_one :user_cv
@@ -9,6 +10,10 @@ class JobApplication < ApplicationRecord
   after_create :set_resume
 
   private
+  def user_resume_url
+    Rails.application.routes.url_helpers.rails_blob_path(self.resume, only_path: true) if  self.resume.attachment
+end
+
   def set_default_status
     self.status = "Application Received"
   end
