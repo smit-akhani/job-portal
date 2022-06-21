@@ -46,6 +46,6 @@ Rails.application.routes.draw do
   end
 
   scope :user do
-    resources :applications
+    resources :job_applications
   end
 end
