@@ -21,6 +21,7 @@ class ExperiencesController < ApplicationController
         @experience=Experience.new(experience_params)
         @experience.user_id=@curent_user.id
         if(@experience.save)
+            add_skill(@experience)
             render :json =>{status:"success"} , status: 200
         else 
               render :json =>{status:@experience.save!} , status: 400
@@ -31,6 +32,7 @@ class ExperiencesController < ApplicationController
         update_status=@experience.update(experience_params)
         
         if(update_status)
+            add_skill(update_status)
             render :json =>{message:"success"} , status: 200
         else 
               render :json =>{message:update_status} , status: 400
@@ -65,6 +67,12 @@ class ExperiencesController < ApplicationController
             @experience=Experience.find_by(id: params[:id])
         end
         
+    end
+    def add_skill(experience)
+        skil_arr=params[:skill]
+        experience.skill.clear
+        experience.skill<<(Skill.where(id:skil_arr))
+        experience.save
     end
 
 end

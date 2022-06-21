@@ -8,7 +8,7 @@
 set :chronic_options, hours24: true
 set :output, "log/cron.log"
 set :environment, :development
-every 1.day , at: '12:00' do
+every 1.day do
     rake "job_alert"
 
 end
