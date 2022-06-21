@@ -60,3 +60,4 @@ gem 'whenever', require: false
 
 gem 'rails_admin', '~> 3.0'
 gem "sassc-rails"
+gem 'bootstrap-email'

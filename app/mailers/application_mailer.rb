@@ -1,4 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
   default from: "leavesystem29@gmail.com"
-  layout "mailer"
+  layout 'bootstrap-mailer'
+
 end

@@ -4,7 +4,8 @@ class JobApplicationsController < ApplicationController
 
     def create
         if check_user_detail
-            @job_application = @user.build_job_application(job_application_params)
+            p @user
+            @job_application = @user.job_applications.new(job_application_params)
             if @job_application.save
                 render json: {
                     message: "Applied successfully"
@@ -22,9 +23,9 @@ class JobApplicationsController < ApplicationController
     end
 
     def show
-
+        @job_application = Job.find(params[:id]).job_applications
+        render json: @job_application
     end
-
     def destroy
 
     end
@@ -40,10 +41,6 @@ class JobApplicationsController < ApplicationController
     end
 
     def check_user_detail
-        if @user.user_detail.nil? || @user.user_detail.empty?
-            return false
-        else
-            return true
-        end
+        return @user.user_detail.valid?
     end
 end
