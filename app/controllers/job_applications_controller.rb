@@ -64,6 +64,7 @@ class JobApplicationsController < ApplicationController
             }, status: 400
         elsif ((@job_application.job.user_id!=nil&&@job_application.job.user_id == current_user&.id)||@job_application.job.company_id == current_company&.id)
             if @job_application.update(job_application_params)
+                JobMailer.with(job_application:@job_application).job_status_change.deliver_now
                 render json: {
                     message: "Application updated successfully"
                 }, status: 200
@@ -79,7 +80,10 @@ class JobApplicationsController < ApplicationController
             }, status: 400
         end
     end
-
+    def my_created_job_application
+        @job_applications = current_user&.job_applications
+        render json: @job_applications, status: 200
+    end
     private
 
     def job_application_params
@@ -89,7 +93,7 @@ class JobApplicationsController < ApplicationController
     def set_user
         @user = Token.new.get_user_from_token(request)
     end
-
+   
     def check_user_detail
         return @user.user_detail.valid?
     end
