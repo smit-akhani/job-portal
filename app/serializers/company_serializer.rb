@@ -1,4 +1,4 @@
 class CompanySerializer < ActiveModel::Serializer
-  attributes :id, :email
   has_one :company_detail
+  has_many :jobs
 end
