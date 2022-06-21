@@ -46,4 +46,8 @@ Rails.application.routes.draw do
   scope :company do
     resource :company_details
   end
+
+  scope :user do
+    resources :job_applications
+  end
 end

@@ -5,6 +5,8 @@ class Job < ApplicationRecord
     belongs_to :company
     has_many :save_jobs, dependent: :destroy
     has_many :users, through: :save_jobs ,dependent: :destroy
+    has_many :job_applications
+  
     # against: [:job_description, :job_title,:location],
                     
     pg_search_scope :search_job,
