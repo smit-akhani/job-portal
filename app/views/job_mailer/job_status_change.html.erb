@@ -1,1 +1,16 @@
-<%=@job_application%>
+<% @job = Job.find(@job_application.job_id) %>
+<% @company = Company.find(@job.company_id) %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+  <% if @job_application.status == "Application Reviewed" %>
+    <p>Your application for the role of <%= @job.job_title %> at <%= @company.company_detail.name %> <strong>was reviewed.</strong></p>
+  <% else %>
+  <p>Your application for the role of <%= @job.job_title %> at <%= @company.company_detail.name %> <strong>is no longer under consideration.</strong></p>
+  <% end %>
+  
+  </body>
+</html>
