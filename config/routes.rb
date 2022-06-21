@@ -50,4 +50,6 @@ Rails.application.routes.draw do
   scope :user do
     resources :job_applications
   end
+
+  resources :companies
 end
