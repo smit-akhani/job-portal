@@ -29,6 +29,7 @@ class UserCvController < ApplicationController
     def add_cv
         user_cv=UserCv.new(user_cv_params)
         @curent_user.user_cvs<<user_cv
+        p @curent_user.save
         if(@curent_user.save)
             render :json =>{status:"success"} , status: 200
         else 

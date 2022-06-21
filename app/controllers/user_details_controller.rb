@@ -21,8 +21,12 @@ class UserDetailsController < ApplicationController
     end
     def update
         user_detail=UserDetail.find_by(users_id:@curent_user.id)
+        params[:user_detail][:gender]=params[:user_detail][:gender]=="false"?0:1
+        # p user_detail_params
         user_detail.update(user_detail_params)
+        # user_detail.gender =params[:user_detail][:gender]=="false"?false:true
         add_skill
+        p user_detail.save!
         render json: user_detail , status: 200
     end
     
