@@ -24,7 +24,7 @@ class JobsController < ApplicationController
             add_skill(@job)
             render :json =>{status:"success",data: @job} , status: 200
         else 
-              render :json =>{status:@job.save!} , status: 400
+              render :json =>{status:@job.errors.full_messages} , status: 400
         end
     end
     def update

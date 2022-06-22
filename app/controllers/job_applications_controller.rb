@@ -12,7 +12,7 @@ class JobApplicationsController < ApplicationController
                 }, status: 200
             else 
                 render json: {
-                    message: "Something went wrong"
+                    message: @job_application.errors.full_messages
                 }, status: 400
             end
         else
@@ -95,6 +95,7 @@ class JobApplicationsController < ApplicationController
     end
    
     def check_user_detail
+        p @user.user_detail.valid?
         return @user.user_detail.valid?
     end
 end

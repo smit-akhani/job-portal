@@ -4,5 +4,6 @@ class CompanyDetail < ApplicationRecord
   has_one_attached :logo
   has_one_attached :banner
   has_many_attached :images
+  # validates :name,:about,:phone, presence: true 
   accepts_nested_attributes_for :address, update_only: true
 end

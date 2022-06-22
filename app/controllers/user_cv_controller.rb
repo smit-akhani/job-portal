@@ -74,6 +74,6 @@ class UserCvController < ApplicationController
         @curent_user=Token.new.get_user_from_token(request)
     end
     def user_cv_params
-        params.require(:user_cv).permit(:title,:is_default,:cv)
+        params.permit(:title,:is_default,:cv)
     end
 end

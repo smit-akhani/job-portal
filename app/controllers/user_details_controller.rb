@@ -16,18 +16,20 @@ class UserDetailsController < ApplicationController
             user_image_url: user_image_url
             } , status: 200
 
-
-        # :json => {user_details: temp,:user_image_url=> user_image_url} , status: 200
     end
     def update
+       
         user_detail=UserDetail.find_by(users_id:@curent_user.id)
-        params[:user_detail][:gender]=params[:user_detail][:gender]=="false"?0:1
-        # p user_detail_params
+        p user_detail
+        if params[:gender]=="female"
+            params[:gender]=false
+        else 
+            params[:gender]=true
+        end
         user_detail.update(user_detail_params)
-        # user_detail.gender =params[:user_detail][:gender]=="false"?false:true
         add_skill
-        p user_detail.save!
-        render json: user_detail , status: 200
+        
+        render json: user_detail.save! , status: 200
     end
     
     private
@@ -36,18 +38,17 @@ class UserDetailsController < ApplicationController
         p @curent_user
     end
     def user_detail_params
-        params.require(:user_detail).permit(:name,:contact_number,:gender,:avatar)  
+        params.permit(:name,:contact_number,:gender,:avatar)  
     end
    def add_skill
         skil_arr=params[:skill]
-        
-        # skil_arr=JSON.parse skil_arr
+        if(skil_arr.nil?)
+            return
+        end 
         @curent_user.skill.clear
-        skil_arr.each do |x|
-             x=x.to_i
-             p x
-             @curent_user.skill<<Skill.find_by(id:x)
-        end
+        
+        @curent_user.skill<<(Skill.where(id:skil_arr))
         @curent_user.save
+        
     end
 end
