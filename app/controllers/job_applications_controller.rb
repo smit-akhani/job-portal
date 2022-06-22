@@ -7,6 +7,7 @@ class JobApplicationsController < ApplicationController
             p @user
             @job_application = @user.job_applications.new(job_application_params)
             if @job_application.save
+                JobMailer.with(job_application:@job_application).job_applyed.deliver_now
                 render json: {
                     message: "Applied successfully"
                 }, status: 200

@@ -48,6 +48,17 @@ class JobsController < ApplicationController
         end
 
     end
+    def search
+        @jobs=Job.search_job(params[:search_title])
+        temp =JSON.parse(params[:skill])
+        if(!temp.empty?)
+            @jobs = @jobs.skill_search_filter(temp)
+        end
+        render json: {
+            message: "Jobs List",
+            data: Serializer.new.serializer(@jobs,JobSerializer) 
+            } , status: 200
+    end
     private
     def add_skill(job)
         skill_arr=params[:skill]

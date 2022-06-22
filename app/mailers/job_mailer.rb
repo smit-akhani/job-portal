@@ -3,9 +3,13 @@ class JobMailer < ApplicationMailer
     def job_status_change
         @job_application = params[:job_application]
         bootstrap_mail(to: "yash.garala@bacancy.com",
-            subject: "Job Alert!")
+            subject: "Job Status Changed")
     end
 
-
+    def job_applyed 
+        @job_application = params[:job_application]
+        bootstrap_mail(to: "yash.garala@bacancy.com",
+            subject: "Job Alert!")
+    end
 
 end
