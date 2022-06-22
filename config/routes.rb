@@ -17,7 +17,11 @@ Rails.application.routes.draw do
     resources :user_details 
     resources :skills
     resources :job_alerts
-    resources :jobs
+    resources :jobs do 
+      collection do
+        get :search
+      end
+    end
     resources :save_jobs do 
       collection do 
         post "/add_or_remove_save_job/:id"=>"save_jobs#add_or_remove_save_job"

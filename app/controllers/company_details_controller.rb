@@ -16,17 +16,10 @@ class CompanyDetailsController < ApplicationController
 
     def create
         @company_detail = CompanyDetail.new(company_detail_params)
-        p  @company_detail
         @address= Address.new(street:params[:company_street],area:params[:company_area],city:params[:company_city],state:params[:company_state],
             country:params[:company_country],pincode:params[:company_pincode])
-        # p @address
         @company.company_detail=@company_detail
         @company.company_detail.address=@address
-        
-        # @company_detail = @company.company_detail.address.new
-        # (street:params[:company_street],area:params[:company_area],city:params[:company_city],state:params[:company_state],
-        #     country:params[:company_country],pincode:params[:company_pincode])
-        
         if @company.save
             render json: {
                 message: "Company details saved successfully",

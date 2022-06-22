@@ -5,7 +5,7 @@ class JobsController < ApplicationController
         @jobs=Job.all
         render json: {
             message: "Jobs List",
-            data: @jobs
+            data: Serializer.new.serializer(@jobs,JobSerializer) 
             } , status: 200
     end
     def show
@@ -13,7 +13,7 @@ class JobsController < ApplicationController
         
         render json: {
             message: "Show Successfully",
-            data: @job
+            data: Serializer.new.serializer(@job,JobSerializer)
             } , status: 200
     end
 
@@ -47,6 +47,17 @@ class JobsController < ApplicationController
               render :json =>{status:@job.destroy!} , status: 400
         end
 
+    end
+    def search
+        @jobs=Job.search_job(params[:search_title])
+        temp =JSON.parse(params[:skill])
+        if(!temp.empty?)
+            @jobs = @jobs.skill_search_filter(temp)
+        end
+        render json: {
+            message: "Jobs List",
+            data: Serializer.new.serializer(@jobs,JobSerializer) 
+            } , status: 200
     end
     private
     def add_skill(job)
