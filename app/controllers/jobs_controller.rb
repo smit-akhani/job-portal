@@ -5,7 +5,7 @@ class JobsController < ApplicationController
         @jobs=Job.all
         render json: {
             message: "Jobs List",
-            data: @jobs
+            data: Serializer.new.serializer(@jobs,JobSerializer) 
             } , status: 200
     end
     def show
@@ -13,7 +13,7 @@ class JobsController < ApplicationController
         
         render json: {
             message: "Show Successfully",
-            data: @job
+            data: Serializer.new.serializer(@job,JobSerializer)
             } , status: 200
     end
 

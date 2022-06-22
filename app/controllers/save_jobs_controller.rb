@@ -5,7 +5,7 @@ class SaveJobsController < ApplicationController
         @save_job=SaveJob.where(user_id: current_user.id)
         render json: {
             message: "Save Job List",
-            data: @save_job
+            data: Serializer.new.serializer(@save_job,SavJobSerializer) 
             } , status: 200
     end
     def add_or_remove_save_job

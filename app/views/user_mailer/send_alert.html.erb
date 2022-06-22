@@ -5,7 +5,7 @@
   height: auto;
 }
 </style>
-<%host="https://f8d9-103-240-35-190.in.ngrok.io"%>
+<%host=ENV["backend_url"]%>
 <%@jobs.each do |x|%>
 <div class="card mb-3" style="max-width: 540px;">
   <div class="row no-gutters">
