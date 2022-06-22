@@ -8,7 +8,7 @@ class JobApplication < ApplicationRecord
   before_create :set_default_status
   before_create :set_apply_date
   after_create :set_resume
-
+  validates :user_id, uniqueness:{scope:[:job_id],message: "You already applied for this job !!" }
   private
   def user_resume_url
     Rails.application.routes.url_helpers.rails_blob_path(self.resume, only_path: true) if  self.resume.attachment

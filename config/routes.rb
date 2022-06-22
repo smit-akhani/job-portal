@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     resources :jobs
     resources :save_jobs do 
       collection do 
-        post :add_or_remove_save_job
+        post "/add_or_remove_save_job/:id"=>"save_jobs#add_or_remove_save_job"
       end
     end
    resources :job_manager

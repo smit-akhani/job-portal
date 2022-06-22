@@ -11,9 +11,7 @@ class SaveJobsController < ApplicationController
     def add_or_remove_save_job
         
         @save_job=SaveJob.where(user_id: current_user.id,job_id: params[:id]).first
-        p @save_job
         if(@save_job==nil)
-            p "Save"
             @save_job=SaveJob.new(user_id: current_user.id,job_id: params[:id])
             if(@save_job.save)
                 render :json =>{status:"Job is Added in Save"} , status: 200

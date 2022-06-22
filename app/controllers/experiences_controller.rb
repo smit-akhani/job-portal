@@ -24,7 +24,7 @@ class ExperiencesController < ApplicationController
             add_skill(@experience)
             render :json =>{status:"success"} , status: 200
         else 
-              render :json =>{status:@experience.save!} , status: 400
+              render :json =>{status:@experience.errors.full_messages} , status: 400
         end
     end
     def update
