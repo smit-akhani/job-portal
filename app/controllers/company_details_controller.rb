@@ -15,8 +15,19 @@ class CompanyDetailsController < ApplicationController
     end
 
     def create
-        @company_detail = @company.build_company_detail(company_detail_params)
-        if @company_detail.save
+        @company_detail = CompanyDetail.new(company_detail_params)
+        p  @company_detail
+        @address= Address.new(street:params[:company_street],area:params[:company_area],city:params[:company_city],state:params[:company_state],
+            country:params[:company_country],pincode:params[:company_pincode])
+        # p @address
+        @company.company_detail=@company_detail
+        @company.company_detail.address=@address
+        
+        # @company_detail = @company.company_detail.address.new
+        # (street:params[:company_street],area:params[:company_area],city:params[:company_city],state:params[:company_state],
+        #     country:params[:company_country],pincode:params[:company_pincode])
+        
+        if @company.save
             render json: {
                 message: "Company details saved successfully",
                 data: Serializer.new.serializer(@company_detail, CompanyDetailSerializer)
@@ -55,9 +66,9 @@ class CompanyDetailsController < ApplicationController
     private
 
     def company_detail_params
-        params.require(:company_detail).permit(:name, :about, :phone, :logo, :banner, :images, address_attributes: [:id, :street, :area, :city, :state, :country, :pincode])
+        params.permit(:name, :about, :phone, :logo, :banner, :images)
+        # , address_attributes: [:id, :street, :area, :city, :state, :country, :pincode]
     end
-
     def set_company
         @company = Token.new.get_company_from_token(request)
     end
