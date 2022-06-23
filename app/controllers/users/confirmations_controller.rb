@@ -24,10 +24,10 @@ class Users::ConfirmationsController <  Devise::ConfirmationsController
       yield resource if block_given?
   
       if resource.errors.empty?
-        redirect_to ENV["backend_url"],allow_other_host: true
+        redirect_to ENV["success_email_url"],allow_other_host: true
        
     else
-      redirect_to ENV["frontend_url"],allow_other_host: true
+      redirect_to ENV["wrong_email_url"],allow_other_host: true
       end
     end
   

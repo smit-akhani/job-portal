@@ -5,7 +5,7 @@ class Companies::ConfirmationsController <  Devise::ConfirmationsController
     def new
       
  
-        redirect_to ENV["frontend_url"]
+        # redirect_to ENV["frontend_url"]
     end
   
     # POST /resource/confirmation
@@ -26,9 +26,9 @@ class Companies::ConfirmationsController <  Devise::ConfirmationsController
       yield resource if block_given?
       p resource.errors.full_messages
       if resource.errors.empty?
-        redirect_to ENV["backend_url"],allow_other_host: true
+        redirect_to ENV["success_email_url"],allow_other_host: true
       else
-        redirect_to ENV["frontend_url"],allow_other_host: true
+        redirect_to ENV["wrong_email_url"],allow_other_host: true
       end
     end
   
@@ -42,7 +42,7 @@ class Companies::ConfirmationsController <  Devise::ConfirmationsController
       # The path used after confirmation.
       def after_confirmation_path_for(resource_name, resource)
         
-        redirect_to ENV["backend_url"]
+        # redirect_to ENV["backend_url"]
       end
   
       def translation_scope
