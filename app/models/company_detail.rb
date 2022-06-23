@@ -14,5 +14,12 @@ class CompanyDetail < ApplicationRecord
     Rails.application.routes.url_helpers.rails_blob_path(self.banner, only_path: true) if  self.banner.attachment
   end
   def images_url
+    image_arr=[]
+
+    self.images.each do |x|
+      p Rails.application.routes.url_helpers.rails_blob_path(x, only_path: true)
+      image_arr<< Rails.application.routes.url_helpers.rails_blob_path(x, only_path: true)
+    end
+    return image_arr
   end
 end

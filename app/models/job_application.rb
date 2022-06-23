@@ -3,7 +3,7 @@ class JobApplication < ApplicationRecord
   attr_accessor :user_resume_url
   belongs_to :user
   has_one_attached :resume
-  has_one :user_cv
+  belongs_to :user_cv
 
   before_create :set_default_status
   before_create :set_apply_date

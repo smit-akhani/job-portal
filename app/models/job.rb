@@ -1,6 +1,6 @@
 class Job < ApplicationRecord
     include PgSearch::Model
-    attr_accessor :comapny_name 
+    attr_accessor :company_detail 
     belongs_to :user, optional: true 
     belongs_to :company
     has_many :save_jobs, dependent: :destroy
@@ -27,8 +27,8 @@ class Job < ApplicationRecord
     # NOTE Job.skill_search_filter([3,9])
     scope :skill_search_filter, ->(skill_set) {joins(:skill).where("skills.id in (?)", skill_set)}
     
-    def comapny_name
-        self.company.email
+    def company_detail 
+        self.company&.company_detail
     end
     def is_not_easy_apply
         self.easy_apply==false 
