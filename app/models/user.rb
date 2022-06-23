@@ -3,6 +3,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
+          :recoverable, :rememberable, :trackable, :validatable,:confirmable,
          :jwt_authenticatable, jwt_revocation_strategy: JwtDenylist
   has_one :user_detail,foreign_key: "users_id", dependent: :destroy
   has_many :user_cvs,foreign_key: "users_id",dependent: :destroy
@@ -24,6 +25,7 @@ class User < ApplicationRecord
   has_many :job_applications
 
   private
+# TODO check is user creation is working or not from frontend side
   def create_user_detail
     curent_user=User.find_by(email: self.email)
     p curent_user.id

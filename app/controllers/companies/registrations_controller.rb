@@ -11,8 +11,7 @@ class Companies::RegistrationsController < Devise::RegistrationsController
   
     def register_success
       render json: {
-        message: 'sign up sucessful.(company)',
-        company: current_company
+        message: 'sign up sucessful.(company)'
       }, status: :ok
     end
   

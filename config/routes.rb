@@ -3,18 +3,24 @@ Rails.application.routes.draw do
   devise_for :companies,
               controllers: {
                 sessions: 'companies/sessions',
-                registrations: 'companies/registrations'
+                registrations: 'companies/registrations',
+                confirmations: 'companies/confirmations'
               }
   devise_for :users,
              controllers: {
                sessions: 'users/sessions',
-               registrations: 'users/registrations'
+               registrations: 'users/registrations',
+               confirmations: 'users/confirmations'
              }
 
   get '/member-data', to: 'members#show'
   get '/company-data', to: 'companies#show'
 
-    resources :user_details 
+    resources :user_details do 
+      collection do
+        post :resend_confirmation
+      end
+    end
     resources :skills
     resources :job_alerts
     resources :jobs do 
@@ -48,7 +54,11 @@ Rails.application.routes.draw do
     end
    
   scope :company do
-    resource :company_details
+    resource :company_details  do 
+      collection do
+        post :resend_confirmation
+      end
+    end
   end
 
   scope :user do

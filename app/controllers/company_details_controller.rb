@@ -1,6 +1,6 @@
 class CompanyDetailsController < ApplicationController
-    before_action :authenticate_company!
-    before_action :set_company
+    before_action :authenticate_company!,except: [:resend_confirmation]
+    before_action :set_company, except: [:resend_confirmation]
     
     def show
         if @company.company_detail
@@ -53,6 +53,22 @@ class CompanyDetailsController < ApplicationController
             render json: {
                 message: "Something went wrong. destroy unsuccessful"
             }, status: 400
+        end
+    end
+    def resend_confirmation
+       
+        company=Company.find_by(email:params[:email])
+     
+        if company!=nil
+            company.send_confirmation_instructions
+            render json: {
+                message: "Confirmation mail sent"
+                } , status: 200
+
+        else 
+            render json: {
+                message: "User not found"
+            } , status: 404
         end
     end
 
