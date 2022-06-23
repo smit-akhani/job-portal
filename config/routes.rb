@@ -61,5 +61,9 @@ Rails.application.routes.draw do
     end
   end
 
+  scope :company do
+    get "/all_applications" => "job_applications#all_applications"
+  end
+
   resources :companies
 end
