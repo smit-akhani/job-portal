@@ -49,11 +49,10 @@ class JobsController < ApplicationController
 
     end
     def search
-        @jobs=Job.search_job(params[:search_title])
-        temp =JSON.parse(params[:skill])
-        if(!temp.empty?)
-            @jobs = @jobs.skill_search_filter(temp)
-        end
+        @jobs=Job.all
+        @jobs=Job.search_job(params[:search_title]) if(!params[:search_title].nil?&&!params[:search_title].blank?)
+        @jobs = @jobs.skill_search_filter(JSON.parse(params[:skill])) if(!params[:skill].nil?&&!JSON.parse(params[:skill]).empty?)
+        
         render json: {
             message: "Jobs List",
             data: Serializer.new.serializer(@jobs,JobSerializer) 
