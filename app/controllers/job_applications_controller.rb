@@ -1,7 +1,16 @@
 class JobApplicationsController < ApplicationController
-    before_action :authenticate_user! ,except: [:show,:update]
-    before_action :set_user ,except: [:show,:update]
+    before_action :authenticate_user! ,except: [:show,:update, :all_applications]
+    before_action :authenticate_company! ,only: [:all_applications]
+    before_action :set_user ,except: [:show,:update, :all_applications]
 
+    def all_applications
+        @company = Token.new.get_company_from_token(request)
+        if @company
+            @job_applications = JobApplication.where(job_id: Job.where(company_id: @company.id).pluck(:id))
+            render json: @job_applications, status: 200
+        end
+    end
+    
     def create
         if check_user_detail
             p @user
