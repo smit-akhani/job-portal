@@ -15,6 +15,7 @@ module JobPortal
 
     # Required for all session management (regardless of session_store)
     config.middleware.use ActionDispatch::Cookies
+    config.active_storage.replace_on_assign_to_many = false
 
     config.middleware.use config.session_store, config.session_options
     # Configuration for the application, engines, and railties goes here.
