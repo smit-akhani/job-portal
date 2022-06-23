@@ -3,12 +3,14 @@ Rails.application.routes.draw do
   devise_for :companies,
               controllers: {
                 sessions: 'companies/sessions',
-                registrations: 'companies/registrations'
+                registrations: 'companies/registrations',
+                confirmations: 'companies/confirmations'
               }
   devise_for :users,
              controllers: {
                sessions: 'users/sessions',
-               registrations: 'users/registrations'
+               registrations: 'users/registrations',
+               confirmations: 'users/confirmations'
              }
 
   get '/member-data', to: 'members#show'

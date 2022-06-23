@@ -1,2 +1,2 @@
-frontend_url: ""
+frontend_url: "http://127.0.0.1:3000"
 backend_url: 'https://6253-103-240-35-190.in.ngrok.io'
