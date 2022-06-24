@@ -1,4 +1,3 @@
-=begin
 require 'faker'
 require 'set'
 
@@ -70,7 +69,6 @@ end
         company_detail.logo.attach(io:File.open('app/assets/no_logo.png'), filename: "no_logo.png", content_type: "image/png")
     company_detail.save
 end
-=end
 
 # NOTE job 
 30.times do
