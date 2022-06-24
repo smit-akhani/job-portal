@@ -1,7 +1,7 @@
 class JobApplicationSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
 
-  attributes :id,:status ,:apply_date,:feedback,:user_resume_url, :custom_name, :custom_title, :custom_profile
+  attributes :id,:user_id,:status ,:apply_date,:feedback,:user_resume_url, :custom_name, :custom_title, :custom_profile
 
   def custom_profile
     rails_blob_path(object.user.user_detail.avatar , only_path: true) if object.user.user_detail.avatar.attached?

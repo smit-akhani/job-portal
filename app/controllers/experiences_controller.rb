@@ -32,7 +32,7 @@ class ExperiencesController < ApplicationController
         update_status=@experience.update(experience_params)
         
         if(update_status)
-            add_skill(update_status)
+            add_skill(@experience)
             render :json =>{message:"success"} , status: 200
         else 
               render :json =>{message:update_status} , status: 400

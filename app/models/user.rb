@@ -18,11 +18,11 @@ class User < ApplicationRecord
   after_save :update_default_cv
 
   has_one :job,dependent: :destroy
-  has_many :job_managers
+  has_many :job_managers,dependent: :destroy
   has_many :companys, through: :job_managers
   has_many :save_jobs, dependent: :destroy
   has_many :jobs, through: :save_jobs ,dependent: :destroy
-  has_many :job_applications
+  has_many :job_applications,dependent: :destroy
 
   private
 # TODO check is user creation is working or not from frontend side

@@ -1,7 +1,7 @@
 class JobApplicationsController < ApplicationController
-    before_action :authenticate_user! ,except: [:show,:update, :all_applications]
-    before_action :authenticate_company! ,only: [:all_applications]
-    before_action :set_user ,except: [:show,:update, :all_applications]
+    before_action :authenticate_user! ,except: [:show,:update, :all_applications,:show_user_profile ]
+    before_action :authenticate_company! ,only: [:all_applications,:show_user_profile]
+    before_action :set_user ,except: [:show,:update, :all_applications,:show_user_profile ]
 
     def all_applications
         @company = Token.new.get_company_from_token(request)
@@ -10,7 +10,26 @@ class JobApplicationsController < ApplicationController
             render json: @job_applications, status: 200
         end
     end
-    
+    def show_user_profile 
+        @job_applications = JobApplication.where(job_id: Job.where(company_id: current_company.id).pluck(:id))
+        @user_applications = JobApplication.where(user_id: params[:id])
+        if(@user_applications==nil||@job_applications==nil)
+            render json: {
+                message: "User is not applied for any job in your comapny"
+            }, status: 400
+            return
+        end
+        temp=@job_applications&@user_applications
+        p temp,"----------------------"
+        if(temp.size()==0)
+            render json: {
+                message: "User is not applied for any job in your comapny"
+            }, status: 400
+        else
+            user=User.find_by(id:params[:id])
+            render json: user, status: 200
+        end 
+    end
     def create
         if check_user_detail
             p @user
