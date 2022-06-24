@@ -9,7 +9,7 @@ class CompaniesController < ApplicationController
         render json: @company, status: 400
       end
     end
-
+    
     def index
       @companies = Company.find(CompanyDetail.all.pluck(:company_id))
       if !@companies.nil?

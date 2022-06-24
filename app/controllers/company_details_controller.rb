@@ -22,10 +22,11 @@ class CompanyDetailsController < ApplicationController
         #     country:params[:company_country],pincode:params[:company_pincode])
         # @company.company_detail=@company_detail
         # @company.company_detail.address=@address
-
+        
+        @company.company_detail.images.attach(params[:images]) if(params[:images])
+        
         @company = @company.build_company_detail(company_detail_params)
 
-        @company.company_detail.images.attach(params[:images])
         
         if @company.save
             render json: {

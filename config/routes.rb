@@ -72,6 +72,8 @@ Rails.application.routes.draw do
   end
 
   scope :company do
+    get "/show_user_profile/:id"=>"job_applications#show_user_profile"
+    
     get "/all_applications" => "job_applications#all_applications"
   end
 

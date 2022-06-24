@@ -5,7 +5,7 @@ class Job < ApplicationRecord
     belongs_to :company
     has_many :save_jobs, dependent: :destroy
     has_many :users, through: :save_jobs ,dependent: :destroy
-    has_many :job_applications
+    has_many :job_applications,dependent: :destroy
      
     validates :job_title, presence: true 
     validates :job_application_link , presence: true, if: :is_not_easy_apply
