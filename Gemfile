@@ -64,3 +64,4 @@ gem 'bootstrap-email'
 gem "figaro"
 gem 'faker'
 
+gem "aws-sdk-s3", require: false
