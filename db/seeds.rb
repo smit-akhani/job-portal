@@ -2,7 +2,9 @@ require 'faker'
 require 'set'
 
 begin
-    user=User.create!(email:"admin@admin.com",password:"123456",password_confirmation:"123456")
+    user=User.new!(email:"admin@admin.com",password:"123456",password_confirmation:"123456")
+    user.skip_confirmation!
+    user.save!
     user.add_role :admin
     
 rescue => e
