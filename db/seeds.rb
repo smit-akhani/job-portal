@@ -54,7 +54,7 @@ end
 
 # NOTE company 
 
-1.times do
+20.times do
     company=Company.new(email:Faker::Internet.email,password:"123456",password_confirmation:"123456")
     company.skip_confirmation!
     company.save
