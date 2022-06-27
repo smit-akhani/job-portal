@@ -41,10 +41,17 @@ class CompanyDetailsController < ApplicationController
     end
 
     def update
+        p params,"-----------------------------------------------------------------------------"
+        
+
+
         @company = Company.find_by(id:current_company.id)
-        @company.company_detail.images.clear
-        @company.company_detail.images.attach(params[:images])
-        if @company.company_detail.update(company_detail_params)
+        if(!(params[:images]).nil? && !(params[:images]).empty?)
+            @company.company_detail.images.clear
+            @company.company_detail.images.attach(params[:images])
+        end
+        p @company
+        if @company.company_detail.update!(company_detail_params)
             render json: {
                 message: "Company details updated successfully"
             }, status: 200

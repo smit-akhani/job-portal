@@ -1,5 +1,5 @@
 class SkillsController < ApplicationController
-    before_action :authenticate_user!
+    before_action :authenticate_user!,except: [:index,:show]
     before_action :set_user_detail ,except: [:index,:show]
     
     before_action :admin_verify, only: [:create, :update, :destroy]

@@ -73,7 +73,7 @@ end
 30.times do
   Job.create!(company:Company.all.sample,job_title:Faker::Job.title,job_description:Faker::Lorem.paragraph,
     year_of_exp:Faker::Number.between(from: 1, to: 10),location:Faker::Address.city,last_date_to_apply:Faker::Date.between(from: '2020-01-01', to: '2025-01-01'),
-    easy_apply:false)
+    easy_apply:true)
 
 end
 
